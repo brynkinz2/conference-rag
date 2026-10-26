@@ -358,7 +358,7 @@ async function checkSearchReadiness() {
                 const { data, error: fnError } = await supabaseClient.functions.invoke('generate-answer', {
                     body: { question: 'test', context_talks: [] }
                 });
-                setSearchReady('rag', !fnError || fnError.context?.status !== 404);
+                setSearchReady('rag', !fnError && typeof data?.answer === 'string');
             } catch {
                 setSearchReady('rag', false);
             }

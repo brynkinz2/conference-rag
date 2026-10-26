@@ -62,6 +62,11 @@ CREATE TABLE IF NOT EXISTS sentence_embeddings (
 CREATE INDEX IF NOT EXISTS sentence_embeddings_talk_id_idx 
 ON sentence_embeddings(talk_id);
 
+-- The search function orders by cosine distance (<=>), so add a matching
+-- approximate-nearest-neighbor index for the embedding column.
+CREATE INDEX IF NOT EXISTS sentence_embeddings_embedding_hnsw_idx
+ON sentence_embeddings USING hnsw (embedding vector_cosine_ops);
+
 -- Enable Row Level Security
 ALTER TABLE sentence_embeddings ENABLE ROW LEVEL SECURITY;
 
