@@ -643,6 +643,10 @@ input:focus {
     line-height: 1.6;
 }
 
+.rag-answer .result-sentences {
+    white-space: pre-line;
+}
+
 .result-sentences mark {
     background: rgba(62, 207, 142, 0.3);
     color: var(--text);
